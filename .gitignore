@@ -1,0 +1,9 @@
+.venv/
+.ipynb_checkpoints/
+__pycache__/
+.DS_Store
+
+# Private study notes: never commit (viva prep, simple explanations, exported copies)
+*[Vv]iva*
+*[Ee]xplained*
+private_notes/
