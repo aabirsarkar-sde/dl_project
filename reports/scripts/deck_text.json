@@ -1,0 +1,51 @@
+{
+ "cv_caption": "The raw LSTM is 6.6 cycles worse than the Forest, more than the fold spread. Adding the 57 features closes the gap.",
+ "ablations": [
+  {
+   "q": "Window length",
+   "detail": "W=10: 43.12   W=30: 41.76   W=50: 41.61",
+   "verdict": "10 is too short. 30 and 50 are within noise (std up to 3.0), so 30 is kept."
+  },
+  {
+   "q": "Dropout",
+   "detail": "0.2: 41.76   none: 40.89",
+   "verdict": "Within noise (std 3.59). Early stopping already does most of the regularising."
+  },
+  {
+   "q": "LSTM vs temporal CNN",
+   "detail": "LSTM: 41.76   CNN: 44.06",
+   "verdict": "CNN slightly worse but inside the fold spread (std 3.56). No evidence it helps."
+  },
+  {
+   "q": "What the model is fed",
+   "detail": "Raw: 41.76   MLP: 34.20   Hybrid: 35.05",
+   "verdict": "The features drive the gain. The LSTM branch adds nothing measurable over the MLP."
+  }
+ ],
+ "err_caption": "Near failure, the hybrid follows the Random Forest closely. The raw LSTM is 2 to 3 times worse in the last 50 cycles. Above RUL 200, every model under-predicts, because early-life engines all look healthy.",
+ "test_caption": "Lowest RMSE: MLP on features. Its CV gap to the Forest is within noise, so we do not call it a win.",
+ "findings": [
+  "Raw 30-cycle windows alone lose to engineered features: CV RMSE 41.76 vs 35.17 for the Random Forest.",
+  "The LSTM overfits training engines within 1 to 6 epochs. A short window cannot show engine age or healthy baseline.",
+  "Adding the 57 features fixes most of the gap (hybrid 35.05), but an MLP on the same features does as well (34.20).",
+  "Answer: on FD001 with uncapped RUL, long-term context (cycle, drift from start) matters more than the model type."
+ ],
+ "notes": {
+  "title": "Phase 2 of the RUL project. Same data and evaluation as Phase 1. The new thing is sequence models on raw sensor windows, plus a hybrid.",
+  "start": "Phase 1: the Random Forest on 57 engineered features had test RMSE 23.32 in this re-run (23.34 in the Colab run, the difference comes from the scikit-learn version). Its top feature was the cycle number. The figure shows sensor s11 for all 100 training engines against cycles before failure: a clear drift near the end, almost nothing far from failure. This is the central difficulty for every model.",
+  "design": "Everything except the model and its input is held fixed: target, sensor rule, the exact same 5 GroupKFold folds, the same metrics, and the test set used once. That makes the comparison with Phase 1 fair.",
+  "windows": "Each row gets a window of its own cycle and the 29 before it, from the same engine. Rows before cycle 30 are padded by repeating the engine's first reading, which only uses the past. So we still predict all 20,631 rows, as in Phase 1. Code assertions check that windows align with rows and never cross engines.",
+  "heatmap": "This is real data, engine 1, after z-scoring. Early in life the readings sit near the mean. In the last 30 cycles several sensors drift strongly up or down. That is what the LSTM can learn from. Scaling statistics come only from each fold's training engines.",
+  "models": "Four models share the same small head. The LSTM is the main model. The CNN tests whether recurrence matters. The MLP is a control that sees only the engineered features. The hybrid combines the LSTM's state with the 57 features. Parameter counts are small because 80 engines is not much data.",
+  "hybrid": "Why the hybrid: the RF in Phase 1 relied heavily on cycle number and on drift from each engine's first 10 cycles. A 30-cycle window cannot see either. So we concatenate the LSTM's last hidden state with the 57 engineered features before the head.",
+  "protocol": "Outer loop: the Phase 1 folds. Inside each training fold, every 5th engine is held back to choose the early-stopping epoch, so the outer held-out engines are never touched. Learning curves: training error keeps falling while validation error is flat or rising after the first few epochs, so the network is overfitting the training engines quickly. Early stopping catches the best epoch, between 1 and 6 here.",
+  "cv": "Main result. The raw LSTM is clearly worse than the Random Forest, by more than the fold standard deviation. The CNN is a bit worse again. Adding the engineered features brings the hybrid level with the Forest. The MLP on features alone is just as good, which tells us where the gain comes from. The capped hybrid is worst on the true target, as in Phase 1.",
+  "ablations": "Each row changes one thing. Short windows hurt. Window 30 vs 50, dropout, and LSTM vs CNN are all within fold noise. The big change comes from the input: adding engineered features cuts RMSE by about 6.7 cycles.",
+  "errors": "Error by true RUL, out of fold. Below 50 cycles left, the RF and hybrid are within about 1 cycle of each other, and the raw LSTM is much worse. From 125 to 175 the raw LSTM is level or slightly better (21.0 vs 25.9 MAE for 125-150). Above 200, all models under-predict heavily, because early-life engines look alike and true RUL can be anything up to 361.",
+  "test": "Test set, used once, 3 seeds per deep model. MLP 21.59, RF 23.32, hybrid 25.23, LSTM 25.33, CNN 26.27. The MLP vs RF difference is within CV noise, so we do not claim the MLP is better. The raw LSTM varies a lot across seeds (plus or minus 3.55), consistent with very short training. Test and CV numbers are not comparable: CV scores every cycle, test scores one cycle per engine.",
+  "conclusions": "Takeaways. Honest answer to the project question: on FD001 with an uncapped target, long-term context beats short-window sequence learning. The hybrid idea is sound in principle, but on this data the ablation shows the features carry the signal. Next steps would be longer or full-history sequences, capped targets for end-of-life focus, and FD002 to FD004.",
+  "end": "Thank you. Questions.",
+  "testplot": "Each dot is one test engine at its last cycle, sorted by true RUL. Near failure every model is close to the truth, which is what matters most for maintenance. Further from failure the scatter grows for all models, the same pattern as in cross-validation."
+ },
+ "testplot_caption": "Black line: true RUL at each test engine's last cycle. For the 30 engines with RUL below 50, all three models sit close to the line. Above about 60, predictions scatter by tens of cycles."
+}
