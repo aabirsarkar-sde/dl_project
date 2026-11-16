@@ -1,0 +1,444 @@
+{
+ "cv": {
+  "Random Forest (Phase 1)": {
+   "RMSE": {
+    "mean": 35.17,
+    "std": 1.52
+   },
+   "MAE": {
+    "mean": 23.03,
+    "std": 1.23
+   },
+   "MAE early": {
+    "mean": 28.8,
+    "std": 1.47
+   },
+   "MAE late": {
+    "mean": 5.02,
+    "std": 0.52
+   }
+  },
+  "LSTM (W=30)": {
+   "RMSE": {
+    "mean": 41.76,
+    "std": 1.7
+   },
+   "MAE": {
+    "mean": 29.81,
+    "std": 2.0
+   },
+   "MAE early": {
+    "mean": 35.4,
+    "std": 1.76
+   },
+   "MAE late": {
+    "mean": 12.33,
+    "std": 3.97
+   }
+  },
+  "LSTM (W=10)": {
+   "RMSE": {
+    "mean": 43.12,
+    "std": 0.99
+   },
+   "MAE": {
+    "mean": 31.1,
+    "std": 1.74
+   },
+   "MAE early": {
+    "mean": 36.7,
+    "std": 1.49
+   },
+   "MAE late": {
+    "mean": 13.6,
+    "std": 3.48
+   }
+  },
+  "LSTM (W=50)": {
+   "RMSE": {
+    "mean": 41.61,
+    "std": 3.02
+   },
+   "MAE": {
+    "mean": 29.66,
+    "std": 3.57
+   },
+   "MAE early": {
+    "mean": 35.26,
+    "std": 3.37
+   },
+   "MAE late": {
+    "mean": 12.18,
+    "std": 4.91
+   }
+  },
+  "LSTM (W=30, no dropout)": {
+   "RMSE": {
+    "mean": 40.89,
+    "std": 3.59
+   },
+   "MAE": {
+    "mean": 29.86,
+    "std": 2.97
+   },
+   "MAE early": {
+    "mean": 35.2,
+    "std": 3.22
+   },
+   "MAE late": {
+    "mean": 13.14,
+    "std": 3.3
+   }
+  },
+  "Temporal CNN (W=30)": {
+   "RMSE": {
+    "mean": 44.06,
+    "std": 3.56
+   },
+   "MAE": {
+    "mean": 31.69,
+    "std": 2.4
+   },
+   "MAE early": {
+    "mean": 36.97,
+    "std": 2.86
+   },
+   "MAE late": {
+    "mean": 15.19,
+    "std": 3.3
+   }
+  },
+  "MLP on 57 features": {
+   "RMSE": {
+    "mean": 34.2,
+    "std": 3.27
+   },
+   "MAE": {
+    "mean": 22.03,
+    "std": 1.4
+   },
+   "MAE early": {
+    "mean": 27.41,
+    "std": 1.74
+   },
+   "MAE late": {
+    "mean": 5.23,
+    "std": 0.6
+   }
+  },
+  "Hybrid LSTM + features (W=30)": {
+   "RMSE": {
+    "mean": 35.05,
+    "std": 2.19
+   },
+   "MAE": {
+    "mean": 23.76,
+    "std": 1.16
+   },
+   "MAE early": {
+    "mean": 29.45,
+    "std": 1.39
+   },
+   "MAE late": {
+    "mean": 6.0,
+    "std": 0.58
+   }
+  },
+  "Hybrid, capped at 125": {
+   "RMSE": {
+    "mean": 46.02,
+    "std": 1.81
+   },
+   "MAE": {
+    "mean": 27.72,
+    "std": 0.44
+   },
+   "MAE early": {
+    "mean": 35.44,
+    "std": 0.57
+   },
+   "MAE late": {
+    "mean": 3.6,
+    "std": 0.2
+   }
+  }
+ },
+ "test": {
+  "Random Forest (Phase 1)": {
+   "RMSE": {
+    "mean": 23.32,
+    "std": 0.0
+   },
+   "MAE": {
+    "mean": 15.57,
+    "std": 0.0
+   },
+   "MAE early": {
+    "mean": 20.52,
+    "std": 0.0
+   },
+   "MAE late": {
+    "mean": 4.03,
+    "std": 0.0
+   }
+  },
+  "LSTM (W=30)": {
+   "RMSE": {
+    "mean": 25.33,
+    "std": 3.55
+   },
+   "MAE": {
+    "mean": 18.29,
+    "std": 3.45
+   },
+   "MAE early": {
+    "mean": 23.3,
+    "std": 4.44
+   },
+   "MAE late": {
+    "mean": 6.58,
+    "std": 1.15
+   },
+   "ens_RMSE": 24.29,
+   "ens_MAE": 17.24,
+   "epochs": 3
+  },
+  "Temporal CNN (W=30)": {
+   "RMSE": {
+    "mean": 26.27,
+    "std": 0.74
+   },
+   "MAE": {
+    "mean": 19.89,
+    "std": 0.48
+   },
+   "MAE early": {
+    "mean": 24.18,
+    "std": 0.22
+   },
+   "MAE late": {
+    "mean": 9.87,
+    "std": 1.16
+   },
+   "ens_RMSE": 25.27,
+   "ens_MAE": 19.07,
+   "epochs": 6
+  },
+  "MLP on 57 features": {
+   "RMSE": {
+    "mean": 21.59,
+    "std": 0.44
+   },
+   "MAE": {
+    "mean": 14.91,
+    "std": 0.42
+   },
+   "MAE early": {
+    "mean": 19.09,
+    "std": 0.39
+   },
+   "MAE late": {
+    "mean": 5.15,
+    "std": 1.28
+   },
+   "ens_RMSE": 21.3,
+   "ens_MAE": 14.66,
+   "epochs": 11
+  },
+  "Hybrid LSTM + features (W=30)": {
+   "RMSE": {
+    "mean": 25.23,
+    "std": 0.15
+   },
+   "MAE": {
+    "mean": 17.68,
+    "std": 0.81
+   },
+   "MAE early": {
+    "mean": 23.28,
+    "std": 0.91
+   },
+   "MAE late": {
+    "mean": 4.63,
+    "std": 0.57
+   },
+   "ens_RMSE": 24.69,
+   "ens_MAE": 17.2,
+   "epochs": 5
+  }
+ },
+ "err_by_bin": {
+  "0-25": {
+   "rf": 3.0,
+   "lstm": 6.8,
+   "hybrid": 4.0,
+   "rows": 2500
+  },
+  "25-50": {
+   "rf": 7.4,
+   "lstm": 18.5,
+   "hybrid": 8.3,
+   "rows": 2500
+  },
+  "50-75": {
+   "rf": 14.9,
+   "lstm": 30.9,
+   "hybrid": 17.200001,
+   "rows": 2500
+  },
+  "75-100": {
+   "rf": 22.2,
+   "lstm": 33.0,
+   "hybrid": 26.200001,
+   "rows": 2500
+  },
+  "100-125": {
+   "rf": 25.5,
+   "lstm": 28.0,
+   "hybrid": 28.0,
+   "rows": 2500
+  },
+  "125-150": {
+   "rf": 25.9,
+   "lstm": 21.0,
+   "hybrid": 24.200001,
+   "rows": 2424
+  },
+  "150-175": {
+   "rf": 23.3,
+   "lstm": 22.700001,
+   "hybrid": 20.5,
+   "rows": 2070
+  },
+  "175-200": {
+   "rf": 27.1,
+   "lstm": 36.5,
+   "hybrid": 26.0,
+   "rows": 1579
+  },
+  "200-225": {
+   "rf": 45.3,
+   "lstm": 53.400002,
+   "hybrid": 42.900002,
+   "rows": 841
+  },
+  "225-250": {
+   "rf": 68.6,
+   "lstm": 80.900002,
+   "hybrid": 68.300003,
+   "rows": 491
+  },
+  "250-275": {
+   "rf": 87.4,
+   "lstm": 110.5,
+   "hybrid": 91.699997,
+   "rows": 334
+  },
+  "275-300": {
+   "rf": 116.2,
+   "lstm": 137.699997,
+   "hybrid": 114.400002,
+   "rows": 144
+  },
+  "300-325": {
+   "rf": 137.7,
+   "lstm": 157.300003,
+   "hybrid": 139.600006,
+   "rows": 87
+  },
+  "325-350": {
+   "rf": 144.5,
+   "lstm": 171.600006,
+   "hybrid": 156.100006,
+   "rows": 50
+  },
+  "350-375": {
+   "rf": 161.9,
+   "lstm": 201.100006,
+   "hybrid": 148.100006,
+   "rows": 11
+  }
+ },
+ "params": {
+  "LSTM": 55873,
+  "CNN": 14689,
+  "MLP": 5825,
+  "Hybrid": 57697
+ },
+ "best_epochs": {
+  "LSTM (W=30)": [
+   3,
+   6,
+   3,
+   1,
+   1
+  ],
+  "LSTM (W=10)": [
+   4,
+   2,
+   4,
+   2,
+   1
+  ],
+  "LSTM (W=50)": [
+   3,
+   1,
+   13,
+   1,
+   1
+  ],
+  "LSTM (W=30, no dropout)": [
+   3,
+   1,
+   10,
+   1,
+   3
+  ],
+  "Temporal CNN (W=30)": [
+   7,
+   1,
+   6,
+   1,
+   8
+  ],
+  "MLP on 57 features": [
+   11,
+   11,
+   9,
+   11,
+   12
+  ],
+  "Hybrid LSTM + features (W=30)": [
+   11,
+   4,
+   10,
+   4,
+   5
+  ],
+  "Hybrid, capped at 125": [
+   40,
+   30,
+   33,
+   28,
+   37
+  ]
+ },
+ "cv_seconds": {
+  "LSTM (W=30)": 86,
+  "LSTM (W=10)": 29,
+  "LSTM (W=50)": 150,
+  "LSTM (W=30, no dropout)": 92,
+  "Temporal CNN (W=30)": 110,
+  "MLP on 57 features": 3,
+  "Hybrid LSTM + features (W=30)": 122,
+  "Hybrid, capped at 125": 351
+ },
+ "n_test_early": 70,
+ "n_test_late": 30,
+ "versions": {
+  "numpy": "2.5.4",
+  "pandas": "3.1.1",
+  "scikit-learn": "1.9.1",
+  "torch": "2.15.0"
+ }
+}
